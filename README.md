@@ -63,9 +63,9 @@ int main()
 
 As any true C++ developer, I avoid using capital letters. To name variables, I use [snake_case](https://en.wikipedia.org/wiki/Snake_case).
 
-## Input and output (I/O)
+## Input and output
 
-Your program needs to get input from the user and provide them with an output. Input and output (I/O) can be provided interactively through the [terminal](https://en.wikipedia.org/wiki/Computer_terminal) or provided in a batch through files.
+Your program needs to get input from the user and provide them with an output. Input and output (IO) can be provided interactively through the [terminal](https://en.wikipedia.org/wiki/Computer_terminal) or provided in a batch through files.
 
 To get interactive input use `cin` (*see-in*, from character input). It will convert the characters to the respective type of the variables. It will skip through spaces and new lines to get the next variable.
 
@@ -102,7 +102,7 @@ You can mix file in terminal IO. You can also use the special output for errors 
 
 IO has a long history. It started with [punched cards](https://en.wikipedia.org/wiki/Punched_card) and [dot matrix printers](https://en.wikipedia.org/wiki/Dot_matrix_printer). Files were stored on [hard disks](https://en.wikipedia.org/wiki/Hard_disk_drive) and [magnet tapes](https://en.wikipedia.org/wiki/Magnetic-tape_data_storage). [Terminals](https://en.wikipedia.org/wiki/Computer_terminal) introduced the [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) and the text-based [monitor](https://en.wikipedia.org/wiki/Computer_monitor). [Floppy disks](https://en.wikipedia.org/wiki/Floppy_disk) and [flash drives](https://en.wikipedia.org/wiki/USB_flash_drive) made possible to move data between computers. [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) introduced the graphical monitor and the [pointing device](https://en.wikipedia.org/wiki/Pointing_device) (like the mouse). [Networks](https://en.wikipedia.org/wiki/Computer_network) made it more easy to move data between computers.
 
-Text-based IO through the terminal and files are commonly used in competitve programming. GUI and networks are not used.
+Text-based IO through the terminal and files are commonly used in competitive programming. GUI and networks are not used.
 
 ## Variable declaration and initialization
 
@@ -115,6 +115,46 @@ Every variable has a *data type*. The [type](https://en.cppreference.com/w/cpp/l
     long j;     // -9*10^18 < j < 9*10^18
     bool b;     // b is true and false
     string s;   // strings of characters, like "abc"
+```
+
+Often you will need to choose the type based on the input size. If a number is less than a billion, choose `int`. If you need to multiply two `int`s or sum a billion of `int`s, choose `long`. Since numbers are stored in binary format, knowing some of the powers of 2 is very useful.
+
+```text
+2^0  =               1
+2^1  =               2  = 1 bit = bool
+2^2  =               4
+2^3  =               8
+2^4  =              16
+2^5  =              32
+2^6  =              64
+2^7  =             128
+2^8  =             256  = 1 byte = char
+2^9  =             512
+2^10 =           1,024  = 1 Kb >= 10^3
+2^11 =           2,048
+2^12 =           4,096
+2^13 =           8,192
+2^14 =          16,384
+2^15 =          32,768
+2^16 =          65,536  = 2 bytes = wchar
+...
+2^20                    = 1 Mb >= 10^6
+2^24 =      16,777,216  = 3 bytes = RGB
+...
+2^30                    = 1 Gb >= 10^9
+2^31 =  2,147,483,647   = int
+2^32 =  4,294,967,295   = 4 bytes = unsigned int + 1
+...
+2^40                    = 1 Tb >= 10^12
+...
+2^50                    = 1 Pb >= 10^15
+...
+2^60                    = 1 Eb >= 10^18
+...
+2^63                    = long
+2^64                    = 4 bytes = unsigned long
+...
+2^305                   >= 10^90 >= the information capacity of the observable universe
 ```
 
 In order to use a variable it first needs to be defined. It's a good practice to define the variable as close as possible to where it is used. Variables can be defined even in loops. They will use the same memory in every iteration of the loop.
@@ -136,11 +176,17 @@ Unless initialized, variables contain random data. It's a good practice to immed
     for (int i = 0; i < 10; cout << ++i);
 ```
 
+
+
+
+
 ## Install and configure Visual Studio Code
 
-Follow [these](https://code.visualstudio.com/docs/introvideos/basics) instructions to install Visual Studio Code.
+Follow [these](https://code.visualstudio.com/docs/introvideos/basics) instructions to install, configure Visual Studio Code and start using it.
 
 Install the [SOI Code](https://soi.ch/wiki/soi-vscode/) extension.
+
+Create `bits/stdc++.h` is instructed [here](https://github.com/khaveesh/macOS-stdc.h).
 
 ## TODO
 
