@@ -12,7 +12,7 @@ problems to solve.
 
 To solve a problem that is not on HackerRank, use [repl.it](https://repl.it/).
 
-## Program skeleton
+### Program skeleton
 
 Use this skeleton code to start coding. Put your code in place of the `|`
 symbol. Name the file `main.cpp`.
@@ -54,7 +54,7 @@ In competitive programs you need to input/output data from/to the console as
 fast as possible. It's advisable to put the `ios_base::sync_with_stdio(false);`
 and `cin.tie(0);` in the beginning of your main function.
 
-## Coding style
+### Coding style
 
 Style refers to the way you organize your code so that it can be read and
 understood. The style is a matter of personal taste.
@@ -91,7 +91,7 @@ int main()
 As any true C++ developer, I avoid using capital letters. To name variables, I
 use [snake_case](https://en.wikipedia.org/wiki/Snake_case).
 
-## Computer
+### Computer
 
 Computers are machines that execute algorithms (aka instructions, programs or
 code) over data. There are many computer architectures with the most popular
@@ -105,7 +105,7 @@ with the slower but durable [mass
 storage](https://en.wikipedia.org/wiki/Mass_storage) trough the Input and
 Output.
 
-## Input and output
+### Input and output
 
 Your program needs to get input from the user and provide them with an output.
 Input and output (IO) can be provided interactively through the
@@ -175,7 +175,7 @@ easy to move data between computers.
 Text-based IO through the terminal and files are commonly used in competitive
 programming. GUI and networks are not used.
 
-## Variable declaration and initialization
+### Variable declaration and initialization
 
 In C++ you can store data in the memory by using variables. You can think of
 variables as a *name* by which we refer to an address in the memory.
@@ -258,7 +258,7 @@ int n; cin >> n;
 for (int i = 0; i < 10; cout << ++i);
 ```
 
-## Vector
+### Vector
 
 Vectors are multiple variables stored contiguously in the memory. Each variable
 in the vector has in index starting at 0.
@@ -314,16 +314,16 @@ for (int i = 0; i < n; ++i)
 
 // O(2^n) - exponential time and space
 // grows as fast as 2^n
-vector<vector<int>> subset;             // to store all subsets of the vector v
-subset.push_back({});                   // start with the empty set
+vector<vector<int> powerset;            // to store all subsets of the vector v
+powerset.push_back(vector<int>());      // start with the empty set
 
-for (int j = 0; j < subset.size(); ++j) // for each subset so far
+for (auto e : v)                        // for each element in v
 {
-    for (auto e : v)                    // for each element in v
+    vector<vector<int> copy = powerset; // copy all subsets so far
+    for (auto s : copy)
     {
-        vector<int> copy = subset[j];   // make a copy of the subset
-        copy.push_back(e);              // add the element to the copy
-        subset.push_back(copy);         // add the copy to the set of subsets
+        s.push_back(e);                 // append the element to each subset
+        powerset.push_back(s);          // append the subsets to the powerset
     }
 }
 ```
@@ -438,7 +438,7 @@ while (m--)
 }
 ```
 
-## Graph algorithms
+### Graph algorithms
 
 Popular graph algorithms are used to traverse the whole graph in a specific
 order or to find a (minimal) path to a node. Graph algorithms are often greedy
@@ -490,7 +490,7 @@ vector<node> graph_algo(const graph& g)
 
 The `sequencer` is a data structure that enforces a specific traversal order.
 
-### Depth-first search (DFS)
+#### Depth-first search (DFS)
 
 Depth-first search (DFS) is a traversal algorithm that uses a `stack`.
 
@@ -547,7 +547,7 @@ void dfs(const graph& g, node v, vector<bool>& visited,
     visited[v] = true;
     path.push_back(v);
 
-    for (node u : g[v]) // for each neighbour
+    for (node u : g[v]) // for each neighbor
     {
         dfs(g, u, visited, path);   // push u to call stack and call recursively
     }
@@ -565,7 +565,7 @@ vector<node> dfs(const graph& g)
 }
 ```
 
-### Breadth-fist search (BFS)
+#### Breadth-fist search (BFS)
 
 Breadth-fist search (BFS) is a traversal algorithm that uses a `queue`.
 
@@ -605,7 +605,7 @@ vector<node> dfs(const graph& g)
 }
 ```
 
-### Dijkstra
+#### Dijkstra
 
 Dijkstra is a traversal algorithm that uses a `priority_queue` the find the
 shortest path from a start to all connected nodes or to a specific finish node.
@@ -661,9 +661,9 @@ vector<node> dijkstra(const graph& g, node start, node finish)
 
 ## TODO
 
-### A*
+#### A*
 
-### Topological sort
+#### Topological sort
 
 The next sections are not complete
 
