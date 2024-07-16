@@ -4,6 +4,10 @@ I'm creating this repo to provide my son Alex with the basic knowledge to
 bootstrap his endeavor in [competitive
 programming](https://en.wikipedia.org/wiki/Competitive_programming).
 
+In 2023/2024 he [ranked
+10th](https://soi.ch/contests/2024/round1/ranking-junior/) in the junior group
+in the first round of the Swiss Olympiad in Informatics.
+
 ## Start coding
 
 Start solving problems in [HackerRank](https://www.hackerrank.com/). HackerRank
@@ -73,7 +77,7 @@ I prefer the
 [Allman](https://en.wikipedia.org/wiki/Indentation_style#Allman_style) style as
 it clearly separates control statements from the body and perhaps because the
 first programming language is studied was
-[Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)).
+[Pascal](<https://en.wikipedia.org/wiki/Pascal_(programming_language)>).
 
 ```c++
 int main()
@@ -112,7 +116,7 @@ Input and output (IO) can be provided interactively through the
 [terminal](https://en.wikipedia.org/wiki/Computer_terminal) or provided in a
 batch through files.
 
-To get interactive input use `cin` (*see-in*, from character input). It will
+To get interactive input use `cin` (_see-in_, from character input). It will
 convert the characters to the respective type of the variables. It will skip
 through spaces and new lines to get the next variable.
 
@@ -178,9 +182,9 @@ programming. GUI and networks are not used.
 ### Variable declaration and initialization
 
 In C++ you can store data in the memory by using variables. You can think of
-variables as a *name* by which we refer to an address in the memory.
+variables as a _name_ by which we refer to an address in the memory.
 
-Every variable has a *data type*. The
+Every variable has a _data type_. The
 [type](https://en.cppreference.com/w/cpp/language/types) determines how much
 memory it uses (measured in bytes) and what types of operations can be performed
 on the data (addition, multiplication, etc).
@@ -277,7 +281,7 @@ cout << a[0] + a[4] + a[11] << '\n';    // 18 = 1st + 5th + 12th elements
 ## Complexity
 
 Programs have certain input. The size of the input may vary. Usually the size
-depends on one or more variables.  Very often it is one variable called `n`.
+depends on one or more variables. Very often it is one variable called `n`.
 
 The program complexity shows how the time and space (or memory) used by the
 program correspond to the input size.
@@ -333,14 +337,14 @@ for (auto e : v)                        // for each element in v
 (source <https://soi.ch/wiki/graphs/>)
 
 A graph is a set of points and connections between those points. A point is
-usually called a *node* or *vertex*, and for a connection, we use the term
-*edge*.
+usually called a _node_ or _vertex_, and for a connection, we use the term
+_edge_.
 
 Nodes are usually numbered form `1` to `n`. For simplicity we assume here that
 nodes are numbered from `0` to `n-1`. If that is not the case, adjust numbering
 by adding/subtracting `1` or by skipping the `0` node.
 
-Two nodes are *adjacent* or *neighbors* if they are connected through an edge.
+Two nodes are _adjacent_ or _neighbors_ if they are connected through an edge.
 Not every two nodes need to be connected.
 
 Graphs can be directed or undirected. Undirected graphs have a bi-directional
@@ -359,11 +363,11 @@ length of roads, price of airplane tickets, etc.
 
 ### How to store a graph?
 
-There are two common ways to store graphs in memory: *adjacency list* and
-*adjacency matrix*. They have different space and time tradeoffs.
+There are two common ways to store graphs in memory: _adjacency list_ and
+_adjacency matrix_. They have different space and time tradeoffs.
 
 | space / time               | adjacency list | adjacency matrix |
-|----------------------------|----------------|------------------|
+| -------------------------- | -------------- | ---------------- |
 | storage                    | O(n+m)         | O(n^2)           |
 | insert edge                | O(1)           | O(1)             |
 | delete edge                | O(m)           | O(1)             |
@@ -373,7 +377,7 @@ There are two common ways to store graphs in memory: *adjacency list* and
 
 #### Adjacency list
 
-The most common way to store a graph is a so-called *adjacency list*. For every
+The most common way to store a graph is a so-called _adjacency list_. For every
 node you store a list of all of its neighbors. If the graph is undirected, for
 each connected pair fo nodes `a` and `b` store two directed edges from `a` to
 `b` and from `b` to `a`.
@@ -392,6 +396,37 @@ while (m--)
     int a, b; cin >> a >> b;
     g[a].push_back(b);
     g[b].push_back(a);
+}
+```
+
+To print a graph, overload ostream::operator<<.
+
+```c++
+ostream& operator<<(ostream& os, const neighbors& n)
+{
+    bool first = true;
+    for (auto u : n)
+    {
+        if (!first) os << ",";
+        first = false;
+        os << u;
+    }
+    return os;
+}
+ostream& operator<<(ostream& os, const graph& g)
+{
+    for (int i = 0; i < g.size(); ++i)
+    {
+        os << i << ": " << g[i] << '\n';
+    }
+    return os;
+}
+
+int main()
+{
+    ...
+
+    cout << g;  // prints to whole graph
 }
 ```
 
@@ -417,10 +452,10 @@ while (m--)
 
 #### Adjacency matrix
 
-In *adjacency matrix* rows and columns represent the nodes and the cell at row
+In _adjacency matrix_ rows and columns represent the nodes and the cell at row
 `a` and column `b` represents the edge between node `a` and node `b`. You can
-either use `bool` to encode the presence or absence of an edge between  `a` and
-`b` or `int` to encode a weight of the edge between  `a` and `b`.
+either use `bool` to encode the presence or absence of an edge between `a` and
+`b` or `int` to encode a weight of the edge between `a` and `b`.
 
 ```c++
 using weight = int;
@@ -445,10 +480,10 @@ order or to find a (minimal) path to a node. Graph algorithms are often greedy
 algorithms. They descend to the first neighbor with some specific
 characteristic:
 
-* the node attached to the last visited node (DFS)
-* the node with the least number of edges from the start (BFS)
-* the node with the shortest path from the start (Dijkstra)
-* the node that has teh shortest distance *by air* from the start (A*)
+- the node attached to the last visited node (DFS)
+- the node with the least number of edges from the start (BFS)
+- the node with the shortest path from the start (Dijkstra)
+- the node that has teh shortest distance _by air_ from the start (A\*)
 
 Graph algorithms have a common structure.
 
@@ -610,7 +645,8 @@ vector<node> dfs(const graph& g)
 Dijkstra is a traversal algorithm that uses a `priority_queue` the find the
 shortest path from a start to all connected nodes or to a specific finish node.
 
-Google maps uses Dijkstra algorithm to show shortest distance between source and destination.
+Google maps uses Dijkstra algorithm to show shortest distance between source and
+destination.
 
 ```c++
 using weight = int;
@@ -661,13 +697,13 @@ vector<node> dijkstra(const graph& g, node start, node finish)
 
 ## TODO
 
-#### A*
+### A\*
 
-#### Topological sort
+### Topological sort
 
 The next sections are not complete
 
-## Install and configure Visual Studio Code
+### Install and configure Visual Studio Code
 
 Follow [these](https://code.visualstudio.com/docs/introvideos/basics)
 instructions to install, configure Visual Studio Code and start using it.
@@ -677,23 +713,33 @@ Install the [SOI Code](https://soi.ch/wiki/soi-vscode/) extension.
 Create `bits/stdc++.h` is instructed
 [here](https://github.com/khaveesh/macOS-stdc.h).
 
-## Call-by-value or call-by-reference
+### Install CLion
 
-Explain pointer type Explain reference type Explain what side effect is Explain
-call-by-value and call-by-reference Explain the [best
-practice](https://www.stroustrup.com/bs_faq2.html#call-by-reference):
+If I manage to obtain free licence, I will include instructions to install and
+use CLion.
 
-* To have a side effect call by reference or use a pointer; e.g. void f(type&);
-  or void f(type*);
-* No side effect but the parameter is big, call by const reference; e.g. void
-  f(const type&);
-* Otherwise, call by value; e.g. void f(type);
+### Call-by-value or call-by-reference
 
-## Change the C++ version
+- Explain pointer type
+- Explain reference type
+- Explain what is a side effect
+- Explain call-by-value and call-by-reference
+- Explain the [best
+  practice](https://www.stroustrup.com/bs_faq2.html#call-by-reference):
+
+Best practice:
+
+- To have a side effect call by reference or use a pointer; e.g. `void
+  f(type&);` or `void f(type*);`
+- No side effect but the parameter is big, call by const reference; e.g. `void
+f(const type&);`
+- Otherwise, call by value; e.g. void f(type);
+
+### Change the C++ version
 
 repl.it vscode <https://replit.com/@GeorgiKostov/cppver>
 
-## Terminal
+### Terminal
 
 parameters, return value, cin, cout, cerr.
 
