@@ -332,6 +332,15 @@ for (auto e : v)                        // for each element in v
 }
 ```
 
+Modern processors run at 4 GH clock speed. That means that they can execute 4
+billion operations in a second. That means that the runtime of an `O(n)`
+algorithm for `n <= 2^32` will be few seconds which is acceptable. However, for
+`n <= 2^64`, the runtime will be roughly 100 years.
+
+For an `O(n^2)` algorithm to complete in seconds, `n <= 2^16` or `n <= 10^5`.
+
+For an `O(2^n)` algorithm to complete in seconds, `n <= 32`.
+
 ## Graphs
 
 (source <https://soi.ch/wiki/graphs/>)
