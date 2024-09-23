@@ -287,9 +287,13 @@ The program complexity shows how the time and space (or memory) used by the
 program correspond to the input size.
 
 ```c++
+#include <bits/stdc++.h>
+using namespace std;
+
 // O(1) - constant time and space
 // Does not grow with n
-// Example: Find the Answer to the Ultimate Question of Life, the Universe, and Everything
+// Example: Find the Answer to the Ultimate Question of 
+//          Life, the Universe, and Everything
 // https://simple.wikipedia.org/wiki/42_(answer)
 int the_answer()
 {
@@ -462,7 +466,8 @@ int main()
     cout << divisors(the_answer()) << '\n';
 
     // O(n) - linear time and space
-    cout << max_subarray_sum({5, 7, 12, -48, 9, 36, -17, 22, 11, -49, 49, -49, 111, -117}) << '\n';
+    cout << max_subarray_sum({5, 7, 12, -48, 9, 36, -17, 22, 
+                              11, -49, 49, -49, 111, -117}) << '\n';
 
     // O(n log n) - linearithmic time and space
     vector<int> v = {3, 1, 2};
