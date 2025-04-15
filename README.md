@@ -292,7 +292,7 @@ using namespace std;
 
 // O(1) - constant time and space
 // Does not grow with n
-// Example: Find the Answer to the Ultimate Question of 
+// Example: Find the Answer to the Ultimate Question of
 //          Life, the Universe, and Everything
 // https://simple.wikipedia.org/wiki/42_(answer)
 int the_answer()
@@ -446,7 +446,7 @@ vector<vector<int>> permutations(vector<int>& v)
 {
     vector<vector<int>> permutations;
     permutations.push_back(v);
-    
+
     while (std::next_permutation(v.begin(), v.end()))
     {
         permutations.push_back(v);
@@ -466,7 +466,7 @@ int main()
     cout << divisors(the_answer()) << '\n';
 
     // O(n) - linear time and space
-    cout << max_subarray_sum({5, 7, 12, -48, 9, 36, -17, 22, 
+    cout << max_subarray_sum({5, 7, 12, -48, 9, 36, -17, 22,
                               11, -49, 49, -49, 111, -117}) << '\n';
 
     // O(n log n) - linearithmic time and space
@@ -512,16 +512,16 @@ roughly 100 years.
 
 Choose the right algorithm for the input constraints of the problem.
 
-| input size  | complexity     | examples              |
-| ----------- | -------------- | --------------------- |
-| n <= 11     | O(n!)          | Permutations          |
-| n <= 32     | O(2^n)         | Power set             |
-| n <= 10^3   | O(n^3)         | Matrix multiplication |
-| n <= 5*10^4 | O(n^2)         | Bubble sort           |
-| n <= 10^6   | O(n log n)     | Merge sort            |
-| n <= 10^9   | O(n)           | Maximum subarray      |
-| n <= 10^18  | O(sqrt n)      | Divisors              |
-| n > 10^9    | O(log n), O(1) | Binary search         |
+| input size   | complexity     | examples              |
+| ------------ | -------------- | --------------------- |
+| n <= 11      | O(n!)          | Permutations          |
+| n <= 32      | O(2^n)         | Power set             |
+| n <= 10^3    | O(n^3)         | Matrix multiplication |
+| n <= 5\*10^4 | O(n^2)         | Bubble sort           |
+| n <= 10^6    | O(n log n)     | Merge sort            |
+| n <= 10^9    | O(n)           | Maximum subarray      |
+| n <= 10^18   | O(sqrt n)      | Divisors              |
+| n > 10^18    | O(log n), O(1) | Binary search         |
 
 ## Graphs
 
@@ -671,10 +671,10 @@ order or to find a (minimal) path to a node. Graph algorithms are often greedy
 algorithms. They descend to the first neighbor with some specific
 characteristic:
 
-- the node attached to the last visited node (DFS)
-- the node with the least number of edges from the start (BFS)
-- the node with the shortest path from the start (Dijkstra)
-- the node that has teh shortest distance _by air_ from the start (A\*)
+-   the node attached to the last visited node (DFS)
+-   the node with the least number of edges from the start (BFS)
+-   the node with the shortest path from the start (Dijkstra)
+-   the node that has teh shortest distance _by air_ from the start (A\*)
 
 Graph algorithms have a common structure.
 
@@ -886,7 +886,47 @@ vector<node> dijkstra(const graph& g, node start, node finish)
 }
 ```
 
+#### Union-Find (Disjoint Set Union - DSU)
+
+Union-Find is a data structure that helps manage a collection of disjoint sets.
+It does that by associating each component of the graph with a representative node (aka _chef_) and
+checking if two nodes belong to the same component.
+
+Union-Find has two operations:
+
+-   `find` - finds the _chef_ of a node
+-   `unite` - creates a union between two components
+
+```c++
+using node = int;
+
+struct ufind
+{
+    // holds the chef of a non-chef node,
+    // or -size of the component for chef nodes
+    vector<node> c;
+    // each node is a component of size 1 (stored as -1)
+    ufind(int n) : c(n, -1) {}
+
+    int find(node k)
+    {
+        return c[k] < 0 ? k : c[k] = find(c[k]);
+    }
+
+    void unite(node a, node b)
+    {
+        a = find(a); b = find(b);
+        if (a == b) return; // a and b in same component
+        if (c[a] > c[b]) swap(a, b);
+        c[a] += c[b];
+        c[b] = a;
+    }
+};
+```
+
 ## TODO
+
+### Minimum Spanning Tree (MST) - Kruskal's algorithm
 
 ### A\*
 
@@ -911,20 +951,20 @@ use CLion.
 
 ### Call-by-value or call-by-reference
 
-- Explain pointer type
-- Explain reference type
-- Explain what is a side effect
-- Explain call-by-value and call-by-reference
-- Explain the [best
-  practice](https://www.stroustrup.com/bs_faq2.html#call-by-reference):
+-   Explain pointer type
+-   Explain reference type
+-   Explain what is a side effect
+-   Explain call-by-value and call-by-reference
+-   Explain the [best
+    practice](https://www.stroustrup.com/bs_faq2.html#call-by-reference):
 
 Best practice:
 
-- To have a side effect call by reference or use a pointer; e.g. `void
+-   To have a side effect call by reference or use a pointer; e.g. `void
 f(type&);` or `void f(type*);`
-- No side effect but the parameter is big, call by const reference; e.g. `void
+-   No side effect but the parameter is big, call by const reference; e.g. `void
 f(const type&);`
-- Otherwise, call by value; e.g. void f(type);
+-   Otherwise, call by value; e.g. void f(type);
 
 ### Change the C++ version
 
