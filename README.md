@@ -144,8 +144,8 @@ ifstream in("input.txt");
 ofstream out("output.txt");
 ```
 
-You can run the same program that using files to use terminal by just setting
-`in` and `out` to be `cin` and `cout` instead of files.
+You can run the same program that is using files with terminal IO by just
+setting `in` and `out` to be `cin` and `cout` instead of files.
 
 ```c++
 istream in(cin.rdbuf());
