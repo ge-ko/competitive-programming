@@ -144,7 +144,7 @@ ifstream in("input.txt");
 ofstream out("output.txt");
 ```
 
-You can have the same program using the terminal and files by just replacing
+You can run the same program that using files to use terminal by just setting
 `in` and `out` to be `cin` and `cout` instead of files.
 
 ```c++
@@ -154,7 +154,7 @@ ostream out(cout.rdbuf());
 // ofstream out("output.txt");
 ```
 
-You can mix file in terminal IO. You can also use the special output for errors
+You can mix file and terminal IO. You can also use the special output for errors
 `cerr`.
 
 IO has a long history. It started with [punched
