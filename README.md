@@ -888,11 +888,11 @@ vector<node> dijkstra(const graph& g, node start, node finish)
 
 #### Union-Find (Disjoint Set Union - DSU)
 
-Union-Find is a data structure that helps manage a collection of disjoint sets.
+_Union-Find_ is a data structure that helps manage a collection of disjoint sets.
 It does that by associating each component of the graph with a representative node (aka _chef_) and
 checking if two nodes belong to the same component.
 
-Union-Find has two operations:
+_Union-Find_ has two operations:
 
 -   `find` - finds the _chef_ of a node
 -   `unite` - creates a union between two components
@@ -924,9 +924,41 @@ struct ufind
 };
 ```
 
-## TODO
+### Minimum Spanning Tree (MST)
 
-### Minimum Spanning Tree (MST) - Kruskal's algorithm
+An `MST` is a subset of edges that connects all vertices in a _connected_, _undirected_, _weighted_ graph without cycles, with the minimum possible total edge _cost_(weight).
+
+#### Kruskal's algorithm
+
+Kruskal's algorithm is a greedy algorithm, which sorts the edges by _cost_ and check for each edge if realized whether a cycle is created. It does that by using _Union-Find_
+
+```c++
+using cost = int;
+using node = int;
+using edge = pair<cost, pair<node, node>>;
+// graph stores edges as individual elements of a vector
+using graph = vector<edge>;
+
+graph kruskal(graph& g, int n)
+{
+    graph mst;
+    // initializes dsu with n - number of nodes
+    ufind dsu(n);
+    sort(g.begin(), g.end());
+    for (auto e : g)
+    {
+        node u = e.second.first;
+        node v = e.second.second;
+        cost c = e.first;
+        if (dsu.find(u) == dsu.find(v)) continue;
+        dsu.unite(u, v);
+        mst.push_back({c, {u, v}});
+    }
+    return mst;
+}
+```
+
+## TODO
 
 ### A\*
 
