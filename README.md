@@ -674,7 +674,7 @@ characteristic:
 -   the node attached to the last visited node (DFS)
 -   the node with the least number of edges from the start (BFS)
 -   the node with the shortest path from the start (Dijkstra)
--   the node that has teh shortest distance _by air_ from the start (A\*)
+-   the node that has the shortest distance _by air_ from the start (A\*)
 
 Graph algorithms have a common structure.
 
@@ -715,6 +715,8 @@ vector<node> graph_algo(const graph& g)
 ```
 
 The `sequencer` is a data structure that enforces a specific traversal order.
+
+### Graph traversal algorithms
 
 #### Depth-first search (DFS)
 
@@ -831,6 +833,8 @@ vector<node> dfs(const graph& g)
 }
 ```
 
+### Shortest path algorithms
+
 #### Dijkstra
 
 Dijkstra is a traversal algorithm that uses a `priority_queue` the find the
@@ -886,13 +890,15 @@ vector<node> dijkstra(const graph& g, node start, node finish)
 }
 ```
 
-#### Union-Find (Disjoint Set Union - DSU)
+#### A\*
 
-_Union-Find_ is a data structure that helps manage a collection of disjoint sets.
+### Union-find (aka Disjoint Set Union - DSU)
+
+_Union-find_ is a data structure that helps manage a collection of disjoint sets.
 It does that by associating each component of the graph with a representative node (aka _chef_) and
 checking if two nodes belong to the same component.
 
-_Union-Find_ has two operations:
+_Union-find_ has two operations:
 
 -   `find` - finds the _chef_ of a node
 -   `unite` - creates a union between two components
@@ -926,11 +932,11 @@ struct ufind
 
 ### Minimum Spanning Tree (MST)
 
-An `MST` is a subset of edges that connects all vertices in a _connected_, _undirected_, _weighted_ graph without cycles, with the minimum possible total edge _cost_(weight).
+An `MST` is a subset of edges that connects all vertices in a _connected_, _weighted_ graph without cycles, with the minimum possible total edge _cost_ (weight).
 
 #### Kruskal's algorithm
 
-Kruskal's algorithm is a greedy algorithm, which sorts the edges by _cost_ and check for each edge if realized whether a cycle is created. It does that by using _Union-Find_
+Kruskal's algorithm is a greedy algorithm, which sorts the edges by _cost_ and checks for each edge if realized whether a cycle is created. It does that by using _Union-Find_.
 
 ```c++
 using cost = int;
@@ -944,6 +950,7 @@ graph kruskal(graph& g, int n)
     graph mst;
     // initializes dsu with n - number of nodes
     ufind dsu(n);
+    // sorts edges by cost
     sort(g.begin(), g.end());
     for (auto e : g)
     {
@@ -958,11 +965,11 @@ graph kruskal(graph& g, int n)
 }
 ```
 
-## TODO
-
-### A\*
+#### Prim's algorithm
 
 ### Topological sort
+
+## TODO
 
 The next sections are not complete
 
