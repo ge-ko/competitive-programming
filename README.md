@@ -969,6 +969,63 @@ graph kruskal(graph& g, int n)
 
 ### Topological sort
 
+Topological sort algorithm, when given tasks, some of which dependent on others,
+returns the tasks in order, such that all can be completed after the ones they
+are dependent on. This can be represented as a directed graph.
+
+#### Kahn's algorithm
+
+Kahn's algorithm does a topological sort by setting an `indegree` for each node
+(number of nodes pointing at that node). After that it pushes into a queue only
+the nodes with `indegree = 0` (they don't depend on other nodes). Then it cycles
+through the queue and puts each node it goes through in a vector that stores the
+topological orientation. Finally for each node in the queue it takes its
+neighboring nodes, decrements their `indegree` and pushes all nodes with
+`indegree = 0` to the queue.
+
+```c++
+using node = int;
+using neighbors = vector<node>;
+using graph = vector<neighbors>;
+
+vector<node> kahn(const graph& g)
+{
+    int n = g.size();
+    vector<int> indegree(n, 0);
+    //sets indegree for each node
+    for (node u = 0; u < n; ++u)
+        for (auto v : g[u])
+        ++indegree[v];
+
+    queue<node> q;
+    //pushes all nodes with indegree = 0
+    for (node u = 0; u < n; ++u)
+        if (indegree[u] == 0) q.push(u);
+
+    vector<node> toposort;
+    while (!q.empty())
+    {
+        node u = q.front();
+        q.pop();
+
+        // adds node to the topological sort
+        toposort.push_back(u);
+
+        for (auto v : g[u])
+        {
+        // decrements indegree
+        --indegree[v];
+        //pushes all nodes with new indegree = 0;
+        if (indegree[v] == 0) q.push(v);
+        }
+    }
+
+    // checks for cycle
+    return toposort.size() == n ? toposort : vector<node>{};
+}
+
+```
+
 ## TODO
 
 The next sections are not complete
