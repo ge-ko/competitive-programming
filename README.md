@@ -967,6 +967,43 @@ graph kruskal(graph& g, int n)
 
 #### Prim's algorithm
 
+Prim's algorithm is very similar to `Dijkstra's`. It uses a priority queue to sort all edges when pushed into it. Each edge in the queue gets added to the mst only if the node the edge leads to has never been visited before. Afterwards we take that node's neighboring edges and we push them to the queue.
+
+```c++
+using node = int;
+using cost = int;
+using edge = pair<cost, pair<node, node>>;
+using neighbors = vector<edge>;
+using graph = vector<neighbors>;
+
+vector<edge> prim(const graph& g)
+{
+    vector<edge> mst;
+
+    int n = g.size();
+    vector<bool> visited(n, false);
+    visited[0] = true;
+
+    priority_queue<edge, vector<edge>, greater<edge>> pq;
+    for(auto& o : g[0]) pq.push(o);
+
+    while(!pq.empty())
+    {
+        edge i = pq.top();
+        node v = i.second.second;
+        pq.pop();
+
+        if (visited[v]) continue;
+        visited[v] = true;
+
+        mst.push_back(i);
+
+        for(auto& o : g[v]) pq.push(o);
+    }
+    return mst;
+}
+```
+
 ### Topological sort
 
 Topological sort algorithm, when given tasks, some of which dependent on others,
